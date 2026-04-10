@@ -1,0 +1,12 @@
+<!-- ir_cron.xml: automaattiset haut (maksut -> Odoo) -->
+<odoo>
+    <record id="cron_fetch_procountor_payments" model="ir.cron">
+        <field name="name">Fetch Procountor Payments</field>
+        <field name="model_id" ref="model_procountor_payment_import"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_fetch_payments()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

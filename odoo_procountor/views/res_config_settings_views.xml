@@ -1,0 +1,19 @@
+<odoo>
+  <record id="res_config_settings_view_form_procountor_mock" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.odoo_procountor</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//form" position="inside">
+        <app data-string="Procountor" string="Procountor" name="odoo_procountor">
+          <block title="Procountor-integraatio" name="procountor_settings">
+            <setting id="procountor_mock_mode_setting" string="Procountor MOCK-tila"
+                     help="Kun käytössä, kaikki API-kutsut korvataan mock-vastauksilla. Ei lähetä dataa Procountoriin.">
+              <field name="procountor_mock_mode"/>
+            </setting>
+          </block>
+        </app>
+      </xpath>
+    </field>
+  </record>
+</odoo>

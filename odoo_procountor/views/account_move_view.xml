@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- NAPPI HEADERIIN: ei attrs/states, käytä uusia modifikaattoreita -->
+    <record id="view_move_form_inherit_procountor_button" model="ir.ui.view">
+      <field name="name">account.move.form.inherit.procountor.button</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="account.view_move_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//form/header" position="inside">
+
+          <!-- Näytä vain myyntilaskuilla (out_invoice/out_refund) -->
+          <button
+            name="action_send_to_procountor"
+            type="object"
+            string="Lähetä Procountoriin"
+            class="btn-primary"
+            invisible="move_type not in ('out_invoice','out_refund')"
+            help="Lähettää laskun Procountoriin. MOCK-tilassa ei tehdä oikeaa verkkokutsua."/>
+          
+          <!-- Jos haluat rajata myös tilan mukaan (esim. vain luonnos+kirjattu), käytä:
+               invisible="(move_type not in ('out_invoice','out_refund')) or (state not in ('draft','posted'))"
+               Huom: 'state' on account.move:n kenttä. -->
+        </xpath>
+      </field>
+    </record>
+
+    <!-- (Valinnainen) kentät näkyviin lomakkeelle -->
+    <record id="view_move_form_inherit_procountor_fields" model="ir.ui.view">
+      <field name="name">account.move.form.inherit.procountor.fields</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="account.view_move_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//sheet" position="inside">
+          <group string="PROCOUNTOR (MOCK)">
+            <field name="procountor_external_id" readonly="1"/>
+            <field name="procountor_last_status" readonly="1"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
